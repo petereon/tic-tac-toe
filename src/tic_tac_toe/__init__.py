@@ -1,19 +1,48 @@
 import numpy as np
 import random
+from typing import Union
+
+player_mapping = {
+    'X': 1,
+    'O': -1,
+    1: 'X',
+    -1: 'O',
+    ' ': 0,
+    0: ' '
+}
 
 def generate_board():
     return np.zeros((3, 3))
 
-def generate_board_repr(board: np.ndarray):
-    print(
+def generate_board_repr(board: np.ndarray, endmes: Union[None, str]):
+    if (board == np.zeros((3,3))).all():
+        print(
 """Game Board Creation...
- | |
+ | | 
 -+-+-
- | |
+ | | 
 -+-+-
- | |
+ | | 
 
 Board Created.""")
+    else:
+        turn = len(np.argwhere(board != 0)) % 2
+
+        if (turn == 1):
+            startmes = "Player X:\n"
+        else:
+            startmes = "Player O:\n"
+
+        # create board:
+        boardmes = ""
+        i = 0
+        for row in board.tolist():
+            i+=1
+            boardmes+= "|".join([player_mapping[player] for player in row]) + '\n'
+            if i!=3:
+                boardmes+= '-+-+-\n'
+        print(startmes + boardmes + '\n\n' + endmes if endmes != None else '')
+            
 
 def player_sign(possible: list, player:str) -> int:
     """
@@ -64,12 +93,20 @@ def assess_game(board: np.ndarray, position: int) -> int:
     if len(np.argwhere(board==0)) == 0:
         return 0
 
+def play_game():
+    """ Put together the game
+    """
 
-if __name__ == "__main__":
+
+
     board = generate_board()
     generate_board_repr(board)
 
     player = 1
     possible = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-    player_sign(possible, player)
+    number = player_sign(possible, player_mapping[player])
+
+
+if __name__ == "__main__":
+    play_game()

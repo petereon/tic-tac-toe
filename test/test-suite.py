@@ -3,7 +3,8 @@ from tic_tac_toe import(
     generate_board, 
     generate_board_repr, 
     player_sign, 
-    assess_game) 
+    assess_game, 
+    play_game) 
 import numpy as np
 
 def test_empty_board():
@@ -12,20 +13,52 @@ def test_empty_board():
     assert (generate_board() == np.zeros((3,3))).all()
 
 
-@pytest.mark.parametrize("board, expected", [
-(np.zeros((3,3)), """Game Board Creation...
- | |
+@pytest.mark.parametrize("board,endmes,expected", [
+(np.zeros((3,3)), None, """Game Board Creation...
+ | | 
 -+-+-
- | |
+ | | 
 -+-+-
- | |
+ | | 
 
-Board Created.""")
+Board Created."""),
+(np.array([[1,0,0],[1,-1,0],[1,0,-1]]),"PLAYER X WON!", """Player X:
+X| | 
+-+-+-
+X|O| 
+-+-+-
+X| |O
+
+PLAYER X WON!"""),
+(np.array([[1,0,1],[-1,-1,-1],[1,0,0]]),"PLAYER O WON!","""Player O:
+X| |X
+-+-+-
+O|O|O
+-+-+-
+X| | 
+
+PLAYER O WON!"""),
+(np.array([[1,0,0],[-1,1,0],[-1,0,1]]),"PLAYER X WON!", """Player X:
+X| | 
+-+-+-
+O|X| 
+-+-+-
+O| |X
+
+PLAYER X WON!"""),
+(np.array([[1,-1,1],[-1,-1,1],[1,1,-1]]),"GAME ENDS WITH A DRAW!","""Player X:
+X|O|X
+-+-+-
+O|O|X
+-+-+-
+X|X|O
+
+GAME ENDS WITH A DRAW!""")
 ])
-def test_empty_board_repr(board, expected, capsys):
+def test_board_repr(board, endmes, expected, capsys):
     """Test empty board repr
     """
-    generate_board_repr(board)
+    generate_board_repr(board, endmes)
     captured, err = capsys.readouterr()    
     assert captured.replace('\n', '') == expected.replace('\n', '')
 
@@ -53,5 +86,18 @@ def test_asses_game(board, position, expected):
     """
     assert assess_game(board, position) == expected
 
-def test_play_game():
-    
+
+# def test_play_game(capsys):
+#     play_game()
+#     captured, err = capsys.readouterr() 
+
+#     assert """Game Board Creation...
+#  | |
+# -+-+-
+#  | |
+# -+-+-
+#  | |
+
+# Board Created.""".replace('\n', '') in captured.replace('\n', '')
+
+#     assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME IS DRAW!" in captured)
