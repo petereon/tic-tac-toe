@@ -1,6 +1,7 @@
 import numpy as np
 import random
 from typing import Union
+import time
 
 player_mapping = {
     'X': 1,
@@ -119,6 +120,7 @@ def play_game():
         else:
             endmes = None
         generate_board_repr(board, endmes)
+        time.sleep(2)
         
 
 if __name__ == "__main__":

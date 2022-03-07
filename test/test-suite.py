@@ -54,7 +54,14 @@ O|O|X
 -+-+-
 X|X|O
 
-GAME ENDS WITH A DRAW!""")
+GAME ENDS WITH A DRAW!"""),
+(np.array([[1,-1,0],[0,0,0],[0,0,0]]),None,"""Player X:
+X|O| 
+-+-+-
+ | | 
+-+-+-
+ | | 
+""")
 ])
 def test_board_repr(board, endmes, expected, capsys):
     """Test empty board repr
