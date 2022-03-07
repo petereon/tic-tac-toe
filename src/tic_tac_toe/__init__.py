@@ -33,16 +33,20 @@ Board Created.""")
             startmes = "Player X:\n"
         else:
             startmes = "Player O:\n"
-
+        
         # create board:
         boardmes = ""
         i = 0
         for row in board.tolist():
             i+=1
-            boardmes+= "|".join([player_mapping[player] for player in row]) + '\n'
+            boardmes+= "|".join([player_mapping[int(player)] for player in row]) + '\n'
             if i!=3:
                 boardmes+= '-+-+-\n'
-        print(startmes + boardmes + '\n\n' + endmes if endmes != None else '')
+        
+        if (endmes == None):
+            endmes = ''      
+
+        print(startmes + boardmes + '\n\n' + endmes)
             
 
 def player_sign(possible: list, player:str) -> int:
@@ -120,7 +124,7 @@ def play_game():
         else:
             endmes = None
         generate_board_repr(board, endmes)
-        time.sleep(2)
+        # time.sleep(2)
         
 
 if __name__ == "__main__":

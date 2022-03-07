@@ -55,7 +55,7 @@ O|O|X
 X|X|O
 
 GAME ENDS WITH A DRAW!"""),
-(np.array([[1,-1,0],[0,0,0],[0,0,0]]),None,"""Player X:
+(np.array([[1,-1,0],[0,0,0],[0,0,0]]),None,"""Player O:
 X|O| 
 -+-+-
  | | 
