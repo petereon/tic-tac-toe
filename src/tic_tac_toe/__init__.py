@@ -43,10 +43,7 @@ Board Created.""")
             if i!=3:
                 boardmes+= '-+-+-\n'
         
-        if (endmes == None):
-            endmes = ''      
-
-        print(startmes + boardmes + '\n\n' + endmes)
+        print(startmes + boardmes + '\n\n' + (endmes if endmes is not None else ''))
             
 
 def player_sign(possible: list, player:str) -> int:
@@ -97,6 +94,23 @@ def assess_game(board: np.ndarray, position: int) -> int:
     else:
         return None
 
+
+
+def process_round(board: np.ndarray, player, turn_position): # eg. pick square with id 7
+    row, col = divmod(turn_position-1, 3) # check
+    board[row][col] = player
+    game_status = assess_game(board, turn_position)
+    if (game_status == 1):
+        endmes = 'PLAYER X WON!'
+    elif (game_status == -1):
+        endmes = 'PLAYER O WON!'
+    elif (game_status == 0):
+        endmes = 'GAME ENDS WITH A DRAW!'
+    else:
+        endmes = None
+    generate_board_repr(board, endmes)
+    return board, game_status
+
 def play_game(sleeptime=2):
     """ Put together the game
     """
@@ -109,23 +123,11 @@ def play_game(sleeptime=2):
     game_status = None
     
     while game_status is None:
-        turn_position = player_sign(possible, player_mapping[player]) # eg. pick square with id 7
-        row, col = divmod(turn_position-1, 3) # check
-        board[row][col] = player
-        game_status = assess_game(board, turn_position)
-        player = player*(-1)
+        turn_position = player_sign(possible, player_mapping[player])
         possible.remove(turn_position)
-        if (game_status == 1):
-            endmes = 'PLAYER X WON!'
-        elif (game_status == -1):
-            endmes = 'PLAYER O WON!'
-        elif (game_status == 0):
-            endmes = 'GAME ENDS WITH A DRAW!'
-        else:
-            endmes = None
-        generate_board_repr(board, endmes)
-        time.sleep(sleeptime)
+        board, game_status = process_round(board, player, turn_position)
+        player = player*(-1)
+        time.sleep(sleeptime)  
         
-
 if __name__ == "__main__":
     play_game()
