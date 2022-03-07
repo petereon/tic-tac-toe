@@ -5,7 +5,8 @@ from tic_tac_toe import(
     generate_board_repr, 
     player_sign, 
     assess_game, 
-    play_game) 
+    play_game,
+    process_round) 
 
 
 def test_empty_board():
@@ -110,3 +111,15 @@ def test_play_game(capsys):
 Board Created.""".replace('\n', '') in captured.replace('\n', '')
 
     assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME IS DRAW!" in captured)
+
+
+@pytest.mark.parametrize('board, player, turn_position, game_status', [
+    (np.array([[1,0,0],[-1,1,0],[-1,0,0]]), 1, 9, 1),
+    (np.array([[1,0,0],[1,-1,0],[0,-1,0]]), 1, 7, 1),
+    (np.array([[1,0,1],[-1,0,-1],[1,0,0]]), -1, 5, -1),
+    (np.array([[1,-1,1],[-1,-1,1],[1,1,0]]), -1, 9, 0),
+])
+def test_process_round(board, player, turn_position, game_status):
+    """Test process round
+    """
+    assert process_round(board, player, turn_position)[1] == game_status
