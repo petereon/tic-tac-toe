@@ -1,11 +1,12 @@
 import pytest
+import numpy as np
 from tic_tac_toe import(
     generate_board, 
     generate_board_repr, 
     player_sign, 
     assess_game, 
     play_game) 
-import numpy as np
+
 
 def test_empty_board():
     """Test empty board
@@ -87,17 +88,17 @@ def test_asses_game(board, position, expected):
     assert assess_game(board, position) == expected
 
 
-# def test_play_game(capsys):
-#     play_game()
-#     captured, err = capsys.readouterr() 
+def test_play_game(capsys):
+    play_game()
+    captured, err = capsys.readouterr() 
 
-#     assert """Game Board Creation...
-#  | |
-# -+-+-
-#  | |
-# -+-+-
-#  | |
+    assert """Game Board Creation...
+ | |
+-+-+-
+ | |
+-+-+-
+ | |
 
-# Board Created.""".replace('\n', '') in captured.replace('\n', '')
+Board Created.""".replace('\n', '') in captured.replace('\n', '')
 
-#     assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME IS DRAW!" in captured)
+    assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME IS DRAW!" in captured)
