@@ -93,13 +93,13 @@ def test_play_game(capsys):
     play_game()
     captured, err = capsys.readouterr() 
 
-#     assert """Game Board Creation...
-#  | |
-# -+-+-
-#  | |
-# -+-+-
-#  | |
+    assert """Game Board Creation...
+ | | 
+-+-+-
+ | | 
+-+-+-
+ | | 
 
-# Board Created.""".replace('\n', '') in captured.replace('\n', '')
+Board Created.""".replace('\n', '') in captured.replace('\n', '')
 
     assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME IS DRAW!" in captured)
