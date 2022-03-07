@@ -13,6 +13,7 @@ include = "tic-tac-toe"
 from = "src"
 
 [tool.poetry.dependencies]
+numpy = "^1.22.2"
 python = "^3.6"
 
 [tool.pytest.ini_options]
