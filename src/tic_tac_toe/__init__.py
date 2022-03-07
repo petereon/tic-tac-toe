@@ -108,7 +108,7 @@ def play_game(sleeptime=2):
     possible = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     game_status = None
     
-    while game_status is None or len(possible) > 0:
+    while game_status is None:
         turn_position = player_sign(possible, player_mapping[player]) # eg. pick square with id 7
         row, col = divmod(turn_position-1, 3) # check
         board[row][col] = player
