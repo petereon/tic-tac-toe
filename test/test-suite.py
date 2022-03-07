@@ -97,7 +97,7 @@ def test_asses_game(board, position, expected):
 
 
 def test_play_game(capsys):
-    play_game()
+    play_game(sleeptime=0)
     captured, err = capsys.readouterr() 
 
     assert """Game Board Creation...

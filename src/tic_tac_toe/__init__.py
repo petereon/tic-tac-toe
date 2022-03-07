@@ -97,7 +97,7 @@ def assess_game(board: np.ndarray, position: int) -> int:
     else:
         return None
 
-def play_game():
+def play_game(sleeptime=2):
     """ Put together the game
     """
 
@@ -124,7 +124,7 @@ def play_game():
         else:
             endmes = None
         generate_board_repr(board, endmes)
-        # time.sleep(2)
+        time.sleep(sleeptime)
         
 
 if __name__ == "__main__":
