@@ -38,8 +38,6 @@ Executor: Naty
 Navigator: Peter
 
 ### TODO:
-
-- Test for function to determine where to put the sign of which player
 - implement function to determine where to put the sign of which player
 - test for empty square
 - implement empty square check
@@ -47,7 +45,24 @@ Navigator: Peter
 ### DONE
 - Empty board generation function
 - Board repr function implementation (printing to cli)
+- Test for function to determine where to put the sign of which player
 
 ## Pomodoro 3:
 Executor: Peter
 Navigator: Naty
+
+### TODO:
+- test for empty square (obsolete)
+- implement empty square check (obsolete)
+
+### DONE:
+- implement function to determine where to put the sign of which player
+- introduce random element in generating position
+- implement winning and draw scenarios (assess game function)
+
+## Pomodoro 4:
+Executor: Naty
+Navigator: Peto
+
+### TODO:
+- call game with all steps

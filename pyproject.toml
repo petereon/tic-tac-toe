@@ -20,5 +20,5 @@ python = "^3.6"
 python_files = [ "*test*.py",]
 python_functions = [ "test",]
 minversion = "6.0"
-addopts = "--cov=tic-tac-toe --cov-report=term-missing"
+addopts = "--cov=tic_tac_toe --cov-report=term-missing"
 testpaths = [ "test",]

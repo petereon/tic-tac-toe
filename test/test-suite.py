@@ -1,5 +1,9 @@
 import pytest
-from tic_tac_toe import generate_board, generate_board_repr, player_sign
+from tic_tac_toe import(
+    generate_board, 
+    generate_board_repr, 
+    player_sign, 
+    assess_game) 
 import numpy as np
 
 def test_empty_board():
@@ -27,7 +31,7 @@ def test_empty_board_repr(board, expected, capsys):
 
 @pytest.mark.parametrize("possible,player,expected_range", [
     ([1, 2, 3, 4, 5, 6, 7, 8, 9], 'X', [1, 2, 3, 4, 5, 6, 7, 8, 9]),
-    ([2, 4, 5], 'O', [2, 3, 5]),
+    ([2, 4, 5], 'O', [2, 4, 5]),
     ([9], 'X', [9])
 ]
 
@@ -37,3 +41,17 @@ def test_player_sign(possible, player, expected_range):
     """
     res = player_sign(possible, player)
     assert res in expected_range
+
+@pytest.mark.parametrize("board,position,expected", [
+    (np.array([[1,0,0],[-1,1,0],[-1,0,1]]), 9, 1),
+    (np.array([[1,0,0],[1,-1,0],[1,-1,0]]), 1, 1),
+    (np.array([[1,0,1],[-1,-1,-1],[1,0,0]]), 6, -1),
+    (np.array([[1,-1,1],[-1,-1,1],[1,1,-1]]), 7, 0)
+])
+def test_asses_game(board, position, expected):
+    """Test asses game
+    """
+    assert assess_game(board, position) == expected
+
+def test_play_game():
+    
