@@ -59,11 +59,8 @@ def assess_game(board: np.ndarray, position: int) -> int:
     """
     row, col = divmod(position-1, 3)
 
-    print(row, col)
-
     player = board[row][col]
     where_player = np.argwhere(board==player)
-
 
     # Vertical
     counter = 0
@@ -92,21 +89,37 @@ def assess_game(board: np.ndarray, position: int) -> int:
 
     if len(np.argwhere(board==0)) == 0:
         return 0
+    else:
+        return None
 
 def play_game():
     """ Put together the game
     """
 
-
-
     board = generate_board()
-    generate_board_repr(board)
+    generate_board_repr(board, None)
 
     player = 1
     possible = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-    number = player_sign(possible, player_mapping[player])
-
+    game_status = None
+    
+    while game_status is None or len(possible) > 0:
+        turn_position = player_sign(possible, player_mapping[player]) # eg. pick square with id 7
+        row, col = divmod(turn_position-1, 3) # check
+        board[row][col] = player
+        game_status = assess_game(board, turn_position)
+        player = player*(-1)
+        possible.remove(turn_position)
+        if (game_status == 1):
+            endmes = 'PLAYER X WON!'
+        elif (game_status == -1):
+            endmes = 'PLAYER O WON!'
+        elif (game_status == 0):
+            endmes = 'GAME ENDS WITH A DRAW!'
+        else:
+            endmes = None
+        generate_board_repr(board, endmes)
+        
 
 if __name__ == "__main__":
     play_game()
