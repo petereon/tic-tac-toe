@@ -1,0 +1,23 @@
+[build-system]
+requires = [ "poetry-core>=1.0.0",]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "tic-tac-toe"
+version = "0.1.0"
+description = "Tic tac toe kata for XPFarm"
+authors = [ "Natasa Plulikova <natasa.plulikova@sk.ibm.com>",]
+license = "NA"
+[[tool.poetry.packages]]
+include = "tic-tac-toe"
+from = "src"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.pytest.ini_options]
+python_files = [ "*test*.py",]
+python_functions = [ "test",]
+minversion = "6.0"
+addopts = "--cov=tic-tac-toe --cov-report=term-missing"
+testpaths = [ "test",]
