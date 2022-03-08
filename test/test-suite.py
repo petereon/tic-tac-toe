@@ -110,7 +110,7 @@ def test_play_game(capsys):
 
 Board Created.""".replace('\n', '') in captured.replace('\n', '')
 
-    assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME IS DRAW!" in captured)
+    assert ("PLAYER X WON!" in captured)  or ("PLAYER O WON!" in captured) or ("GAME ENDS WITH A DRAW!" in captured)
 
 
 @pytest.mark.parametrize('board, player, turn_position, game_status', [
